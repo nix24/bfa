@@ -1,0 +1,116 @@
+:root {
+  --bg-color: rgba(30, 30, 30, 0.8);
+  --text-color: #fff;
+  --border-radius: 10px;
+  --blur: 10px;
+  --transition-duration: 0.3s;
+}
+
+body {
+  background-color: #1c1c1c;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background: var(--bg-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  width: 80%;
+  max-width: 800px;
+  backdrop-filter: blur(var(--blur));
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.input-pass {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+input[type="password"],
+input[type="checkbox"] {
+  appearance: none;
+  outline: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  transition: background var(--transition-duration);
+}
+
+input[type="password"]:focus,
+input[type="checkbox"]:focus {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+input[type="checkbox"]:checked {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+button {
+  background: linear-gradient(145deg, #42e695, #3bb283);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 5px 5px 15px #2e2e2e, -5px -5px 15px #4a4a4a;
+  transition: all var(--transition-duration);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 8px #2e2e2e, -3px -3px 8px #4a4a4a;
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 1px 1px 4px #2e2e2e, -1px -1px 4px #4a4a4a;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+label input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.brute-force {
+  margin-top: 2rem;
+}
+
+.brute-force-output {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  font-family: "Courier New", Courier, monospace;
+  white-space: pre-wrap;
+}
+
+p {
+  color: var(--text-color);
+  margin: 0;
+}
+
+p + p {
+  margin-top: 1rem;
+}
