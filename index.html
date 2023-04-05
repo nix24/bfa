@@ -21,9 +21,40 @@
           Use same password length
         </label>
 
+        <label>
+          <input type="checkbox" id="useSpecialCharacters" />
+          Use special characters
+        </label>
+
         <button id="submit">Submit</button>
       </div>
       <div class="brute-force">
+        <!-- Add the following inside the "brute-force" div -->
+        <div class="brute-force-settings">
+          <label class="input-number-label">
+            Minimum password length:
+            <input
+              type="number"
+              class="input-number"
+              id="minPassLength"
+              value="1"
+              min="1"
+              max="15"
+            />
+          </label>
+          <label class="input-number-label">
+            Maximum password length:
+            <input
+              type="number"
+              class="input-number"
+              id="maxPassLength"
+              value="15"
+              min="1"
+              max="15"
+            />
+          </label>
+        </div>
+
         <!--div where when the user submits their own password, it will start to generate passwords until it matches the user input-->
         <h2>Brute force attack</h2>
         <div class="brute-force-output">
@@ -32,60 +63,25 @@
           <p>Attempts: <span id="attemptCount">0</span></p>
         </div>
       </div>
+      <div class="password-history">
+        <h2>Password history</h2>
+        <table id="passwordHistoryTable">
+          <thead>
+            <tr>
+              <th>Password</th>
+              <th>Attempts</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="attempt-stats">
+        <h2>Attempt Statistics</h2>
+        <p>Longest attempts: <span id="longestAttempts">0</span></p>
+        <p>Shortest attempts: <span id="shortestAttempts">0</span></p>
+        <p>Average attempts: <span id="averageAttempts">0</span></p>
+      </div>
     </div>
+    <script src="app.js"></script>
   </body>
-  <script>
-    document.getElementById("submit").addEventListener("click", function () {
-      const inputPass = document.getElementById("passUser").value;
-      const outputElement = document.getElementById("bruteForceOutput");
-      const useSameLength = document.getElementById("sameLength").checked;
-
-      bruteForceAttack(useSameLength);
-
-      function generateRandomPassword(length) {
-        const characters =
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        let result = "";
-
-        for (let i = 0; i < length; i++) {
-          result += characters.charAt(
-            Math.floor(Math.random() * characters.length)
-          );
-        }
-
-        return result;
-      }
-
-      function bruteForceAttack(useSameLength) {
-        const maxLength = useSameLength ? inputPass.length : 15;
-        let found = false;
-        let generatedPass = "";
-        let attemptCount = 0;
-        const attemptCountElement = document.getElementById("attemptCount");
-
-        function tryPassword(passwordLength) {
-          if (passwordLength <= maxLength) {
-            setTimeout(function () {
-              generatedPass = generateRandomPassword(passwordLength);
-              outputElement.textContent = generatedPass;
-              attemptCount++;
-              attemptCountElement.textContent = attemptCount;
-
-              if (generatedPass === inputPass) {
-                found = true;
-              } else {
-                tryPassword(passwordLength + 1);
-              }
-            }, 50);
-          } else {
-            if (!found) {
-              tryPassword(useSameLength ? maxLength : 1);
-            }
-          }
-        }
-
-        tryPassword(useSameLength ? maxLength : 1);
-      }
-    });
-  </script>
 </html>
